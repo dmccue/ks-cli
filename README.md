@@ -6,7 +6,7 @@ Author: David McCue 2015
 
 Tested on MacOS X Yosemite - 10.10.2
 
-* brew
+* homebrew
 ~~~
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ~~~

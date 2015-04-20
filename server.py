@@ -6,7 +6,7 @@
 import sqlite3, re, os
 from bottle import route, run, debug, template, request, static_file, error, response
 
-db_filename=os.path.dirname(os.path.realpath(__file__)) + '/kickstarter.db'
+db_filename=os.path.dirname(os.path.realpath(__file__)) + '/db/kickstarter.db'
 
 # Validate currency values
 def valid_amount(amount):
@@ -131,7 +131,6 @@ def back_new():
   c.execute("SELECT id FROM 'project' WHERE name = '" + back['projectname'] + "';")
   result = c.fetchall()
   c.close()
-  print "DEBUG_test: " + str(result)
 
   if not result:
     response.status = 400
@@ -145,10 +144,9 @@ def back_new():
 # retrieve backer by name
 @route('/backer/<backer>')
 def backer_list(backer):
-  print "DEBUG: Backer: " + backer
   conn = sqlite3.connect(db_filename)
   c = conn.cursor()
-  c.execute("SELECT project.name, transaction.name, transaction.amount FROM transaction, project WHERE transaction.name = '" + backer + "' and transaction.projectid = project.id;")
+  c.execute("SELECT project.name, 'transaction'.name, 'transaction'.amount FROM 'transaction' JOIN project ON 'transaction'.projectid = project.id WHERE 'transaction'.name = '" + backer + "';")
   result = c.fetchall()
   c.close()
 

@@ -8,6 +8,8 @@ import sys, re, requests, json
 def print_help():
   print """
 Usage:
+  args:
+    [-f] Point to filename containing parameters
 
   ./project <project name>
 
@@ -18,6 +20,7 @@ Usage:
   ./backer <backer name>
 
 """
+  sys.exit(1)
 
 def printCurrency(inputVal):
   return re.sub('\.00','', "%.2f" % float(inputVal))
@@ -25,7 +28,19 @@ def printCurrency(inputVal):
 server_url = "http://localhost:8080"
 headers = {'accept':'application/json', 'content-type' : 'application/json'}
 
-if sys.argv[0] == "./project":
+if len(sys.argv) < 2:
+  print_help()
+
+if sys.argv[1] == "-f":
+  with open (sys.argv[2], "r") as myfile:
+    filecontents = myfile.readlines()
+  del sys.argv[1:]
+  sys.argv = sys.argv + filecontents
+  for i in range(len(sys.argv)):
+    sys.argv[i] = sys.argv[i].replace('\n','')
+  print str(sys.argv)
+
+if sys.argv[0].endswith("/project"):
   data = {}
   data['name'] = sys.argv[1]
   data['target'] = sys.argv[2]
@@ -37,7 +52,7 @@ if sys.argv[0] == "./project":
     print r.json()['msg']
     sys.exit(1)
 
-elif sys.argv[0] == "./list":
+elif sys.argv[0].endswith("/list"):
   r = requests.get(server_url + '/project/' + sys.argv[1])
   if r.status_code == requests.codes.ok:
     jsonProj = r.json()['project']
@@ -56,7 +71,7 @@ elif sys.argv[0] == "./list":
     sys.exit(1)
 
 
-elif sys.argv[0] == "./back":
+elif sys.argv[0].endswith("/back"):
   data = {}
   data['name'] = sys.argv[1]
   data['projectname'] = sys.argv[2]
@@ -71,11 +86,11 @@ elif sys.argv[0] == "./back":
     sys.exit(1)
 
 
-elif sys.argv[0] == "./backer":
+elif sys.argv[0].endswith("/backer"):
   r = requests.get(server_url + '/backer/' + sys.argv[1])
   if r.status_code == requests.codes.ok:
     for backer in r.json()['backer']:
-      print "-- Backed " + backer[0] + " for $" + printCurrency(backer[1])
+      print "-- Backed " + backer[0] + " for $" + printCurrency(backer[2])
   else:
     print r.json()['msg']
     sys.exit(1)

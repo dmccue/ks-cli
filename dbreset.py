@@ -5,7 +5,7 @@
 
 import sqlite3, sys
 
-conn = sqlite3.connect('kickstarter.db')
+conn = sqlite3.connect('db/kickstarter.db')
 
 conn.execute("DROP TABLE IF EXISTS 'project';")
 conn.execute("CREATE TABLE 'project' ( id INTEGER PRIMARY KEY, name char(20) NOT NULL, target REAL NOT NULL );")

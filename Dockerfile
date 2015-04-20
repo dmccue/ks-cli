@@ -6,7 +6,7 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN pip install bottle
+RUN pip install bottle requests
 
 RUN git clone https://github.com/sstephenson/bats.git; \
 	cd bats; \

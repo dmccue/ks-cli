@@ -6,7 +6,7 @@ Author: David McCue 2015
 
 Tested on MacOS X Yosemite - 10.10.2
 
-* brew - (MACOS only)
+* brew
 ~~~
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ~~~
@@ -20,7 +20,7 @@ brew install git
 ~~~
 * boot2docker 1.6
 ~~~
-Get dmg or tgz from http://boot2docker.io
+brew install boot2docker
 ~~~
 * bats - testing framework
 ~~~
@@ -34,6 +34,10 @@ brew install python
 ~~~
 pip install requests
 ~~~
+* netcat - tcp connectivity test
+~~~
+brew install netcat
+~~~
 
 ### Run:
 
@@ -44,7 +48,13 @@ cd ks-cli
 ./setup.sh
 ~~~
 
-To manually use cli interface, cd to the cli directory
+To manually use cli interface, cd to the cli directory after running ./setup.sh
 ~~~
+./setup.sh
 cd cli
+
+./project
+./back
+./backer
+./list
 ~~~

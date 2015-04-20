@@ -30,6 +30,36 @@
   [ $status -eq 0 ]
 }
 
+@test "project: name short limit" {
+  run cli/project abc 500
+  [ $status -eq 1 ]
+  [ "$output" = "ERROR: Project name validation error" ]
+}
+
+@test "project: name long limit" {
+  run cli/project twentytwentytwentytwe 500
+  [ $status -eq 1 ]
+  [ "$output" = "ERROR: Project name validation error" ]
+}
+
+@test "project: name invalid char" {
+  run cli/project invalid^char 500
+  [ $status -eq 1 ]
+  [ "$output" = "ERROR: Project name validation error" ]
+}
+
+@test "project: amount dollar test" {
+  run cli/project amounttest1 500
+  [ $status -eq 0 ]
+  [ "${lines[0]}" = "Added amounttest1 project with target of \$500" ]
+}
+
+@test "project: amount cent test" {
+  run cli/project amounttest2 0.01
+  [ $status -eq 0 ]
+  [ "${lines[0]}" = "Added amounttest2 project with target of \$0.01" ]
+}
+
 @test "back: Check we can back a project" {
   run cli/back John Awesome_Sauce 4111111111111111 50
   echo "$output"
@@ -71,14 +101,14 @@
 
 
 @test "db: List project table" {
-  skip "debugging"
+  skip "debug use"
   run sqlite3 kickstarter.db "select * from project;"
   echo "$output"
   [ $status -ne 0 ]
 }
 
 @test "db: List transaction table" {
-  skip "debugging"
+  skip "debug use"
   run sqlite3 kickstarter.db "select * from 'transaction';"
   echo "$output"
   [ $status -ne 0 ]

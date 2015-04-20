@@ -58,3 +58,11 @@ cd cli
 ./backer
 ./list
 ~~~
+
+### Logs:
+
+In order to display realtime logging internally on the REST server, please run:
+
+~~~
+docker attach ks-restserver
+~~~

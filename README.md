@@ -10,33 +10,13 @@ Tested on MacOS X Yosemite - 10.10.2
 ~~~
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ~~~
-* docker
+* Brew dependencies - python/docker/git/boot2docker/bats/netcat
 ~~~
-brew install docker
+brew install python docker git boot2docker bats netcat
 ~~~
-* git
-~~~
-brew install git
-~~~
-* boot2docker 1.6
-~~~
-brew install boot2docker
-~~~
-* bats - testing framework
-~~~
-brew install bats
-~~~
-* python - python language runtimes
-~~~
-brew install python
-~~~
-* requests - rest client library
+* Python dependencies - requests
 ~~~
 pip install requests
-~~~
-* netcat - tcp connectivity test
-~~~
-brew install netcat
 ~~~
 
 ### Run:
@@ -64,5 +44,8 @@ cd cli
 In order to display realtime logging internally on the REST server, please run:
 
 ~~~
-docker attach ks-restserver
+view logs:
+docker logs -f ks-restserver
+or interactively:
+docker exec -it ks-restserver bash
 ~~~

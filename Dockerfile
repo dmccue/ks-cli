@@ -1,12 +1,15 @@
-FROM gliderlabs/alpine:3.1
-MAINTAINER David McCue
+from gliderlabs/alpine
+maintainer David McCue
 
-RUN apk --update add python py-pip git
+copy server.py dbreset.py requirements.txt /tmp/
 
-RUN pip install bottle requests
+workdir /tmp
 
-EXPOSE 8080
+run apk --update add python py-pip git
+run pip install -r requirements.txt && \
+	mkdir db && \
+	python dbreset.py
 
-COPY . /tmp/
+expose 8080
 
-CMD /tmp/server.py
+cmd python server.py

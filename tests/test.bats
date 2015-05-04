@@ -2,6 +2,15 @@
 
 # Author: David McCue
 
+@test "docker: kill existing container" {
+  run docker rm -f ks-restserver
+}
+
+@test "docker: start rest container" {
+  run docker run --name ks-restserver -p 8080:8080 -d ks-restserver
+  [ $status -eq 0 ]
+}
+
 @test "db: Reset database" {
   run python dbreset.py
   [ $status -eq 0 ]

@@ -16,4 +16,3 @@ conn.execute("CREATE TABLE 'transaction' ( id INTEGER PRIMARY KEY, projectid INT
 conn.commit()
 conn.close()
 
-sys.exit(0)

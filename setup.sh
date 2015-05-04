@@ -9,7 +9,7 @@ ln -sf ../client.py cli/list
 ln -sf ../client.py cli/project
 which docker &>/dev/null || ( echo Please install docker: https://docs.docker.com/installation/; exit 1 )
 boot2docker up &>/dev/null
-boot2docker shellinit &>/dev/null
+eval "$(boot2docker shellinit)" &>/dev/null
 echo
 echo INFO: Building docker image
 docker build -t ks-restserver .

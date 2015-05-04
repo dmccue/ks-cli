@@ -59,7 +59,7 @@ elif sys.argv[0].endswith("/list"):
     jsonBack = r.json()['backers']
     totalFunding = 0.0
     for backer in jsonBack:
-      print "-- " + str(backer[0]) + " backed for $" + printCurrency(str(backer[1]))
+      print "-- " + str(backer[0]) + " backed for $" + printCurrency(backer[1])
       totalFunding = totalFunding + backer[1]
     totalGoal = jsonProj[2] - totalFunding
     if totalGoal <= 0.0:

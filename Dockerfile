@@ -1,16 +1,9 @@
-FROM debian
+FROM gliderlabs/alpine:3.1
 MAINTAINER David McCue
 
-RUN apt-get update && \
-    apt-get install -y python python-pip netcat git && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+RUN apk --update add python py-pip git
 
 RUN pip install bottle requests
-
-RUN git clone https://github.com/sstephenson/bats.git; \
-	cd bats; \
-	./install.sh /usr/local
 
 EXPOSE 8080
 

@@ -25,18 +25,24 @@ To download files, setup and run automated tests please run:
 ~~~
 git clone https://github.com/dmccue/ks-cli.git
 cd ks-cli
-./setup.sh
+. ./setup.sh
 ~~~
 
 To manually use cli interface, cd to the cli directory after running ./setup.sh
 ~~~
-./setup.sh
 cd cli
 
 ./project
 ./back
 ./backer
 ./list
+~~~
+
+### Tests:
+
+To run repeatable tests using docker run:
+~~~
+bats tests
 ~~~
 
 ### Logs:

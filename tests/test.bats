@@ -2,18 +2,14 @@
 
 # Author: David McCue
 
+@test "docker: env DOCKER_HOST set" {
+  run docker ps
+  [ -n "$DOCKER_HOST" ]
+  [ $status -eq 0 ]
+}
+
 @test "docker: kill existing container" {
   run docker rm -f ks-restserver
-}
-
-@test "docker: start rest container" {
-  run docker run --name ks-restserver -p 8080:8080 -d ks-restserver
-  [ $status -eq 0 ]
-}
-
-@test "db: Reset database" {
-  run python dbreset.py
-  [ $status -eq 0 ]
 }
 
 @test "setup: symlinks" {
@@ -22,6 +18,11 @@
   run ln -sf ../client.py cli/backer
   run ln -sf ../client.py cli/list
   run ln -sf ../client.py cli/project
+}
+
+@test "docker: start rest container" {
+  run docker run --name ks-restserver -p 8080:8080 -d ks-restserver
+  [ $status -eq 0 ]
 }
 
 @test "setup: Check connectivity to REST server" {
@@ -108,7 +109,6 @@
   [ $output = "-- Backed Awesome_Sauce for \$50" ]
   [ $status -eq 0 ]
 }
-
 
 @test "db: List project table" {
   skip "debug use"

@@ -17,6 +17,7 @@
 }
 
 @test "setup: symlinks" {
+  mkdir -p cli
   run ln -sf ../client.py cli/back
   run ln -sf ../client.py cli/backer
   run ln -sf ../client.py cli/list

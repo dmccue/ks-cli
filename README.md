@@ -1,6 +1,7 @@
 ## ks-cli
 
 Author: David McCue 2015
+Based on spec from: https://gist.githubusercontent.com/ktheory/3c28ba04f4064fd9734f/raw/1f946f70bc1b291430be26d5ac7a0d1311b77fa7/minikick.md
 
 ### Requirements (MACOS):
 
